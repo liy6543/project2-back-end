@@ -14,6 +14,8 @@ connection.connect();
 
 function rowToObject(row){
 	return{
+   c_id:row.c_id,
+   p_id:row.p_id,
 	 year:row.year,
 	 month: row.month,
 	 day:row.day,
@@ -31,9 +33,9 @@ app.get('/get',(request, response) => {
     });
 });
 
-app.post('/ShoppingComments',(request, response) => {
- const query = 'INSERT INTO ShoppingComments(year,month,day,message) VALUES (?,?,?,?)';
- const params = [request.body.year,request.body.month,request.body.day,request.body.message];
+app.post('/post',(request, response) => {
+ const query = 'INSERT INTO Comments(p_id,year,month,day,message) VALUES (?,?,?,?,?)';
+ const params = [request.body.p_id,request.body.year,request.body.month,request.body.day,request.body.message];
  connection.query(query, params, (error, result) => {
 	response.send({
 	 ok: true,
